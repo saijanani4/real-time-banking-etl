@@ -42,7 +42,6 @@ end
     E --> F
     F --> G
 ```
-![Architecture](images/architecture.png)
 
 **Pipeline flow:**
 1. Synthetic transaction generator writes JSON batches to GCS (Raw).
