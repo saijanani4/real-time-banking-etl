@@ -8,16 +8,26 @@ This project is designed to showcase both **Data Engineering** (ETL, orchestrati
 ---
 
 ## Architecture Diagram
+## I/O Architecture Diagram
+
 ```mermaid
 flowchart LR
 
-    A[Transaction Generator<br>Databricks Notebook]
-    B[GCS Raw Bucket<br>finance-datalake-raw]
-    C[Bronze Layer<br>Auto Loader + Delta]
-    D[Silver Layer<br>Clean & Enrich]
-    E[Gold Layer<br>Business KPIs]
-    F[Databricks SQL Warehouse]
-    G[Power BI Dashboard]
+    subgraph INPUT
+        A[Transaction Generator]
+        B[GCS Raw Bucket<br>JSON Files]
+    end
+
+    subgraph PROCESS
+        C[Bronze Layer<br>Streaming Ingestion]
+        D[Silver Layer<br>Data Cleaning & Enrichment]
+        E[Gold Layer<br>KPI Aggregations]
+    end
+
+    subgraph OUTPUT
+        F[Databricks SQL Warehouse]
+        G[Power BI Dashboard]
+    end
 
     A --> B
     B --> C
@@ -26,6 +36,7 @@ flowchart LR
     E --> F
     F --> G
 ```
+
 **Pipeline flow:**
 1. Synthetic transaction generator writes JSON batches to GCS (Raw).
 2. Databricks Auto Loader ingests into **Bronze** (streaming + checkpointing).
