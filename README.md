@@ -6,29 +6,35 @@ Built a cloud-native **financial transaction lakehouse** using **Databricks on G
 This project is designed to showcase both **Data Engineering** (ETL, orchestration, streaming, governance) and **Data Analytics** (data modeling, DAX, dashboards, business KPIs).
 
 ---
+## Key Skills Demonstrated
 
-## Architecture Diagram
+- Cloud ETL pipeline design (Databricks on GCP)
+- Streaming ingestion using Auto Loader
+- Medallion Architecture implementation
+- Workflow orchestration (Dev & Prod environments)
+- Star schema data modeling
+- SQL Warehouse serving layer
+- Power BI dashboard development
+
+---
 ## I/O Architecture Diagram
 
 ```mermaid
 flowchart LR
 
-    subgraph INPUT
-        A[Transaction Generator]
-        B[GCS Raw Bucket<br>JSON Files]
-    end
-
-    subgraph PROCESS
-        C[Bronze Layer<br>Streaming Ingestion]
-        D[Silver Layer<br>Data Cleaning & Enrichment]
-        E[Gold Layer<br>KPI Aggregations]
-    end
-
-    subgraph OUTPUT
-        F[Databricks SQL Warehouse]
-        G[Power BI Dashboard]
-    end
-
+subgraph INPUT
+    A[Transaction Generator]
+    B[GCS Raw Bucket<br>JSON Files]
+end
+subgraph PROCESS
+    C[Bronze Layer<br>Streaming Ingestion]
+    D[Silver Layer<br>Data Cleaning & Enrichment]
+    E[Gold Layer<br>KPI Aggregations]
+end
+subgraph OUTPUT
+    F[Databricks SQL Warehouse]
+    G[Power BI Dashboard]
+end
     A --> B
     B --> C
     C --> D
@@ -36,6 +42,7 @@ flowchart LR
     E --> F
     F --> G
 ```
+![Architecture](images/architecture.png)
 
 **Pipeline flow:**
 1. Synthetic transaction generator writes JSON batches to GCS (Raw).
@@ -118,7 +125,9 @@ Creates analytics-ready tables:
 - Parameterized environment configuration (env=dev or env=prod)
 - Databricks Workflows:
   - Dev: fast iteration
+![Executive Overview](images/job_dev_graph.png)
   - Prod: scheduled daily run (07:00)
+![Executive Overview](images/job_prod_graph.png)
 - Details: see orchestration/workflows.md
 
 ## Dashboard (Power BI)
