@@ -76,6 +76,8 @@ real-time-banking-etl/
 ├── orchestration/
 │   ├── workflows.md
 │   └── runbook.md
+├── powerbi/
+│   ├── Finance_Transaction_Monitoring.pbix
 ├── images/
 │   ├── dashboard_executive.png
 │   ├── dashboard_insights.png
