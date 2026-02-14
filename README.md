@@ -76,8 +76,6 @@ real-time-banking-etl/
 ├── orchestration/
 │   ├── workflows.md
 │   └── runbook.md
-├── architecture/
-│   └── lakehouse_architecture.png
 ├── images/
 │   ├── dashboard_executive.png
 │   ├── dashboard_insights.png
